@@ -1,0 +1,37 @@
+{
+    "name": "pogplaces.com",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+        "dev": "next dev",
+        "build": "next build",
+        "start": "next start",
+        "lint": "next lint --fix && prettier --write 'pages/' 'components/' 'data/' 'style/' 'types/' > /dev/null"
+    },
+    "dependencies": {
+        "axios": "1.2.1",
+        "axios-auth-refresh": "^3.3.6",
+        "bootstrap": "5.2.3",
+        "moment": "2.29.4",
+        "moment-timezone": "0.5.40",
+        "next": "13.1.1",
+        "react": "18.2.0",
+        "react-bootstrap": "2.7.0",
+        "react-bootstrap-typeahead": "6.0.0",
+        "react-dom": "18.2.0",
+        "react-hook-form": "7.41.5",
+        "react-icons": "4.7.1",
+        "sass": "1.57.1",
+        "swr": "2.0.0"
+    },
+    "devDependencies": {
+        "@types/node": "18.11.18",
+        "@types/react": "18.0.26",
+        "eslint": "8.31.0",
+        "eslint-config-next": "13.1.1",
+        "eslint-plugin-prettier": "4.2.1",
+        "prettier": "2.8.2",
+        "prettier-plugin-organize-imports": "3.2.1",
+        "typescript": "4.9.4"
+    }
+}
