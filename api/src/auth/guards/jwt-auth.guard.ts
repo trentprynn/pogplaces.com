@@ -4,10 +4,6 @@ import { AuthGuard } from '@nestjs/passport'
 @Injectable()
 export class JwtAuthGuard extends AuthGuard('jwt') {
   handleRequest(err: any, user: any, info: any, context: any, status: any) {
-    console.log('HANDLE')
-    console.log(info)
-    console.log(info == 'JsonWebTokenError')
-
     // absolutely shit way of checking info object but this is all untyped and we don't have access
     // to the nestjs passport types so we have to do it like this unfortunately
 

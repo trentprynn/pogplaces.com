@@ -20,6 +20,8 @@ export default function Dashboard() {
         }
     }, [user, loggedOut, router])
 
+    const [searchAddress, setSearchAddress] = useState<string | undefined>(undefined)
+
     const [results, setResults] = useState<any | undefined>(undefined)
     const [filteredResults, setFilteredResults] = useState<any | undefined>(undefined)
 
@@ -41,20 +43,28 @@ export default function Dashboard() {
         setResponseIsLoading(true)
         setResults(undefined)
         setPageCode(undefined)
+        setSearchAddress(undefined)
         setFilteredResults(undefined)
         setFetchError(null)
         axiosInstance
-            .get<any>(`/places/${formData.search}`)
+            .get<any>(`/places/${formData.search.toLowerCase()}`)
             .then(function (response) {
                 console.log('GOT PLACE DETAILS')
                 console.log(response.data)
 
                 setPageCode(response.data.next_page_token)
 
+                setSearchAddress(response.data.search_address)
+
                 setResults(response.data.results)
 
                 let filteredResults = response.data.results.filter((r: any) => {
-                    return r.rating >= 4.5
+                    return (
+                        r.rating >= 4.5 &&
+                        r.user_ratings_total < 1000 &&
+                        r.user_ratings_total > 5 &&
+                        r.business_status === 'OPERATIONAL'
+                    )
                 })
                 setFilteredResults(filteredResults)
             })
@@ -85,7 +95,12 @@ export default function Dashboard() {
                 setResults(combinedResults)
 
                 let filteredAdditionalResults = additionalResponse.data.results.filter((r: any) => {
-                    return r.rating >= 4.5
+                    return (
+                        r.rating >= 4.5 &&
+                        r.user_ratings_total < 1000 &&
+                        r.user_ratings_total > 5 &&
+                        r.business_status === 'OPERATIONAL'
+                    )
                 })
 
                 let filteredCombinedResults = filteredResults.concat(filteredAdditionalResults)
@@ -109,7 +124,7 @@ export default function Dashboard() {
                 </Col>
             </Row>
 
-            <Row className="justify-content-center">
+            <Row className="justify-content-center mb-4">
                 <Col xs="12" md="6" xl="2">
                     <h2 className="mt-5">Place Search</h2>
                     <Form onSubmit={handleSubmit(onSubmit)} className="mt-3">
@@ -136,9 +151,27 @@ export default function Dashboard() {
                 <React.Fragment>
                     <Row className="justify-content-center mt-3">
                         <Col xs="12" md="6" xl="2">
+                            {searchAddress && (
+                                <div className="mb-4">
+                                    <p className="mb-0">Recommendations for:</p>
+                                    <p className="mb-0">
+                                        <b>{searchAddress}</b>
+                                    </p>
+                                    <p style={{ fontSize: '10px', color: 'gray' }}>
+                                        {`if this address doesn't seem quite right, please search again with a more detailed search address`}
+                                    </p>
+                                </div>
+                            )}
+
+                            {filteredResults.length > 0 && (
+                                <div className="mb-3">
+                                    <h3>Recommendations:</h3>
+                                    <hr></hr>
+                                </div>
+                            )}
+
                             {filteredResults.map((result: any) => (
                                 <div key={result.place_id} className="mb-5">
-                                    <h3>RESULT</h3>
                                     <p>name: {result.name}</p>
                                     <p>status: {result.business_status}</p>
                                     <p>price level: {result.price_level}</p>

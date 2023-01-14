@@ -12,30 +12,30 @@ export class PlacesController {
   constructor(private placesService: PlacesService) {}
 
   @ApiBearerAuth()
-  @ApiOperation({ summary: `Get recommendations for a zip code` })
+  @ApiOperation({ summary: `Get recommendations place` })
   @ApiOkResponse({
-    description: 'The user',
+    description: 'The place recommendation response',
     type: RecommendationResponse,
   })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
   @UseGuards(JwtAuthGuard)
-  @CacheTTL(100)
+  @CacheTTL(300)
   @UseInterceptors(CacheInterceptor)
-  @Get(':search')
-  async getUser(@Req() req: AuthenticatedRequest, @Param('search') search: string) {
+  @Get(':searchString')
+  async getUser(@Req() req: AuthenticatedRequest, @Param('searchString') searchString: string) {
     console.log('GET PLACES')
-    return this.placesService.getPlaceRecommendationsBySearchString(search)
+    return this.placesService.getPlaceRecommendationsBySearchString(searchString)
   }
 
   @ApiBearerAuth()
-  @ApiOperation({ summary: `Get additional recommendations for a zip code` })
+  @ApiOperation({ summary: `Get additional recommendations for a previous search` })
   @ApiOkResponse({
-    description: 'The user',
+    description: 'The additional places',
     type: RecommendationResponse,
   })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
   @UseGuards(JwtAuthGuard)
-  @CacheTTL(100)
+  @CacheTTL(300)
   @UseInterceptors(CacheInterceptor)
   @Get('/more-places/:pageCode')
   async getMorePlaces(@Req() req: AuthenticatedRequest, @Param('pageCode') pageCode: string) {

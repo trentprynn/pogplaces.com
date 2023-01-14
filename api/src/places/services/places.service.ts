@@ -59,7 +59,12 @@ export class PlacesService {
         )
     )
 
-    return getPlacesResponse.data
+    const returnObject = {
+      ...getPlacesResponse.data,
+      ...{ search_address: geoCodeResponse.data.results[0].formatted_address },
+    }
+
+    return returnObject
   }
 
   public async getMorePlaceRecommendations(pageToken: string) {
