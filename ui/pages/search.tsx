@@ -1,5 +1,6 @@
 import axiosInstance from 'data/axios-instance'
 import useUser from 'data/use-user'
+import Image from 'next/image'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import { Button, Col, Form, Row } from 'react-bootstrap'
@@ -119,20 +120,36 @@ export default function Dashboard() {
         <React.Fragment>
             <Row className="justify-content-center">
                 <Col xs="auto">
-                    <h1 className="text-center">Dashboard</h1>
-                    {user && <p className="text-center">{user.email}</p>}
+                    <h2>Place Search</h2>
+                </Col>
+            </Row>
+
+            <Row className="justify-content-center">
+                <Col xs="auto" className="d-flex align-items-end pe-0">
+                    <span className="text-muted" style={{ fontSize: '12px' }}>
+                        <b>powered by&nbsp;</b>
+                    </span>
+                </Col>
+                <Col xs="auto" className="ps-0">
+                    <Image
+                        className="img-fluid"
+                        loading="lazy"
+                        height={18}
+                        width={59}
+                        src="/google_on_white.png"
+                        alt="google logo"
+                    ></Image>
                 </Col>
             </Row>
 
             <Row className="justify-content-center mb-4">
                 <Col xs="12" md="6" xl="2">
-                    <h2 className="mt-5">Place Search</h2>
                     <Form onSubmit={handleSubmit(onSubmit)} className="mt-3">
                         <Form.Group className="mb-3" controlId="search">
                             <Form.Label>Search</Form.Label>
                             <Form.Control
                                 type="text"
-                                placeholder="Enter search"
+                                placeholder="Enter address"
                                 {...register('search', { required: true })}
                             />
                             {errors.search && <Form.Text className="text-danger">Search value is required</Form.Text>}

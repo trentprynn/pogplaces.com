@@ -8,10 +8,10 @@ export default function Root() {
     const router = useRouter()
     const { user, loggedOut } = useUser()
 
-    // if logged in, redirect to the dashboard
+    // if logged in, redirect to the search page
     useEffect(() => {
         if (!loggedOut) {
-            router.replace('/dashboard')
+            router.replace('/search')
         }
     }, [user, router, loggedOut])
 

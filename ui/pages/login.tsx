@@ -28,7 +28,7 @@ export default function Login() {
     // if logged in, redirect to the dashboard
     useEffect(() => {
         if (!loggedOut) {
-            router.replace('/dashboard')
+            router.replace('/search')
         }
     }, [user, router, loggedOut])
 
