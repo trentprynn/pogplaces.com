@@ -12,14 +12,14 @@ type FormValues = {
 
 export default function Dashboard() {
     const router = useRouter()
-    const { user, loggedOut } = useUser()
+    const { user, loggedOut, loading } = useUser()
 
     // if logged in, redirect to the dashboard
     useEffect(() => {
-        if (loggedOut) {
+        if (loggedOut && !loading) {
             router.replace('/login')
         }
-    }, [user, loggedOut, router])
+    }, [user, loggedOut, loading, router])
 
     const [searchAddress, setSearchAddress] = useState<string | undefined>(undefined)
 

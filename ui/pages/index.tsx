@@ -6,14 +6,14 @@ import { Button, Col, Row } from 'react-bootstrap'
 
 export default function Root() {
     const router = useRouter()
-    const { user, loggedOut } = useUser()
+    const { user, loggedOut, loading } = useUser()
 
     // if logged in, redirect to the search page
     useEffect(() => {
-        if (!loggedOut) {
+        if (!loggedOut && !loading) {
             router.replace('/search')
         }
-    }, [user, router, loggedOut])
+    }, [user, router, loggedOut, loading])
 
     return (
         <React.Fragment>

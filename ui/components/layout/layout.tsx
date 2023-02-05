@@ -132,7 +132,12 @@ export default function Layout({ children, title = 'PogPlaces' }: { children: an
                                         </Col>
 
                                         <Col xs="auto" className="d-flex aligns-items-center">
-                                            <OverlayTrigger trigger="click" placement="bottom" overlay={profilePopover}>
+                                            <OverlayTrigger
+                                                trigger="click"
+                                                placement="bottom"
+                                                rootClose
+                                                overlay={profilePopover}
+                                            >
                                                 <Button type="button">
                                                     <BiUserCircle className="fs-4" />
                                                 </Button>

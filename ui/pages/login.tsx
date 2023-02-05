@@ -17,7 +17,7 @@ type TokenReturn = {
 
 export default function Login() {
     const router = useRouter()
-    const { user, loggedOut, mutate } = useUser()
+    const { user, loggedOut, loading, mutate } = useUser()
 
     const {
         register,
@@ -27,10 +27,10 @@ export default function Login() {
 
     // if logged in, redirect to the dashboard
     useEffect(() => {
-        if (!loggedOut) {
+        if (!loggedOut && !loading) {
             router.replace('/search')
         }
-    }, [user, router, loggedOut])
+    }, [user, router, loggedOut, loading])
 
     const [loginError, setLoginError] = useState<string | null>(null)
     const [loginIsLoading, setLoginIsLoading] = useState(false)
