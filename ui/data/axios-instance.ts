@@ -13,9 +13,7 @@ axiosInstance.interceptors.request.use(function (request) {
     if (token) {
         const parsedToken: Token = JSON.parse(token)
 
-        request.headers
-            ? (request.headers.Authorization = `Bearer ${parsedToken.access_token}`)
-            : (request.headers = { Authorization: `Bearer ${parsedToken.access_token}` })
+        request.headers.Authorization = `Bearer ${parsedToken.access_token}`
     }
 
     return request
