@@ -115,7 +115,7 @@ export default function Layout({ children, title = 'PogPlaces' }: { children: an
                                     </React.Fragment>
                                 )}
 
-                                {!loggedOut && (
+                                {user && (
                                     <React.Fragment>
                                         <Col xs="auto">
                                             <Link href="/search" passHref>

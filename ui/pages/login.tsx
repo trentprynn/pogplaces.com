@@ -1,3 +1,4 @@
+import Layout from 'components/layout/layout'
 import axiosInstance from 'data/axios-instance'
 import useUser from 'data/use-user'
 import { useRouter } from 'next/router'
@@ -64,40 +65,42 @@ export default function Login() {
     }
 
     return (
-        <Container>
-            <Row className="justify-content-center">
-                <Col xs="auto">
-                    <h1>Login</h1>
+        <Layout>
+            <Container>
+                <Row className="justify-content-center">
+                    <Col xs="auto">
+                        <h1>Login</h1>
 
-                    <Form onSubmit={handleSubmit(onSubmit)} className="mt-3">
-                        <Form.Group className="mb-3" controlId="logInEmail">
-                            <Form.Label>Email address</Form.Label>
-                            <Form.Control
-                                type="email"
-                                placeholder="Enter email"
-                                {...register('email', { required: true })}
-                            />
-                            {errors.email && <Form.Text className="text-danger">Email is required</Form.Text>}
-                        </Form.Group>
+                        <Form onSubmit={handleSubmit(onSubmit)} className="mt-3">
+                            <Form.Group className="mb-3" controlId="logInEmail">
+                                <Form.Label>Email address</Form.Label>
+                                <Form.Control
+                                    type="email"
+                                    placeholder="Enter email"
+                                    {...register('email', { required: true })}
+                                />
+                                {errors.email && <Form.Text className="text-danger">Email is required</Form.Text>}
+                            </Form.Group>
 
-                        <Form.Group className="mb-3" controlId="logInPassword">
-                            <Form.Label>Password</Form.Label>
-                            <Form.Control
-                                type="password"
-                                placeholder="Enter password"
-                                {...register('password', { required: true })}
-                            />
-                            {errors.password && <Form.Text className="text-danger">Password is required</Form.Text>}
-                        </Form.Group>
+                            <Form.Group className="mb-3" controlId="logInPassword">
+                                <Form.Label>Password</Form.Label>
+                                <Form.Control
+                                    type="password"
+                                    placeholder="Enter password"
+                                    {...register('password', { required: true })}
+                                />
+                                {errors.password && <Form.Text className="text-danger">Password is required</Form.Text>}
+                            </Form.Group>
 
-                        {loginError && <p className="text-danger">{loginError}</p>}
+                            {loginError && <p className="text-danger">{loginError}</p>}
 
-                        <Button variant="primary" type="submit" disabled={loginIsLoading}>
-                            Log in
-                        </Button>
-                    </Form>
-                </Col>
-            </Row>
-        </Container>
+                            <Button variant="primary" type="submit" disabled={loginIsLoading}>
+                                Log in
+                            </Button>
+                        </Form>
+                    </Col>
+                </Row>
+            </Container>
+        </Layout>
     )
 }

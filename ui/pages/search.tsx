@@ -1,3 +1,4 @@
+import Layout from 'components/layout/layout'
 import axiosInstance from 'data/axios-instance'
 import useUser from 'data/use-user'
 import Image from 'next/image'
@@ -117,7 +118,7 @@ export default function Dashboard() {
     }
 
     return (
-        <React.Fragment>
+        <Layout>
             <Row className="justify-content-center">
                 <Col xs="auto">
                     <h2>Place Search</h2>
@@ -226,6 +227,6 @@ export default function Dashboard() {
                     </Row>
                 </React.Fragment>
             )}
-        </React.Fragment>
+        </Layout>
     )
 }
