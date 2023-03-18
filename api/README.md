@@ -5,16 +5,12 @@ This is the API portion of the Pog Places project
 ## Running this project
 1. Create a local database using `docker` that our API can connect to
 ```bash
-docker run --name pog-places-db -e POSTGRES_USER=pog-places_user -e POSTGRES_PASSWORD=pog-places_pass -e POSTGRES_DB=pog-places -p 5432:5432 -v pog-places_data:/var/lib/postgresql/data -d postgres
+docker run --name pog-places-db -e POSTGRES_USER=pog-places-user -e POSTGRES_PASSWORD=pog-places-pass -e POSTGRES_DB=pog-places -p 5432:5432 -v pog-places-data:/var/lib/postgresql/data -d postgres
 ```
 
-2. Create a `.env` file in the root of the api directory with the following variables defined
+2. Create a `.env` file the defines the required runtime variables
 ```bash
-DATABASE_URL=postgres://pog-places_user:pog-places_pass@localhost:5432/pog-places?schema=public
-JWT_SECRET=LOCAL_SECRET_KEY
-JWT_LIFE_SECONDS=3600
-REFRESH_TOKEN_SECRET=LOCAL_REFRESH_SECRET
-REFRESH_TOKEN_LIFE_SECONDS=2592000
+cp .env.sample .env
 ```
 
 3. Install dependencies, run migrations, and start the API with hot reloading enabled
