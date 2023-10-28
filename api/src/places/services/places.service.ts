@@ -15,7 +15,7 @@ export class PlacesService {
       this.httpService
         .get(`https://maps.googleapis.com/maps/api/geocode/json`, {
           params: {
-            address: `${search},US`,
+            address: `${search}`,
             key: `${process.env.GOOGLE_MAPS_API_KEY}`,
           },
         })
